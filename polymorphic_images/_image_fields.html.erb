@@ -1,0 +1,36 @@
+<%= javascript_include_tag "admin/admin_image_rows" %>
+
+<table id="image-rows">
+  <thead>
+    <th>Image <span class="required-field">*</span></th>
+    <th>Display order <span class="required-field">*</span></th>
+    <th>Name</th>
+    <th>Attribution</th>
+    <th>Image Type</th>
+    <th>Delete</th>
+  </thead>
+  <tbody>
+  <div class=".js-admin-image-rows">
+    <% form.object.images.build %>
+    <%= form.fields_for :images do |builder| %>
+      <tr class="js-admin-image-row">
+        <td><%= image_tag(builder.object.image.url :small) if builder.object.id %><%= builder.file_field :image %></td>
+        <td><%= builder.text_field :position, style: "width: 50px;", value: "#{ builder.object.position || form.object.images.count }" %></td>
+        <td><%= builder.text_field :name, style: "width: 175px;" %></td>
+        <td><%= builder.text_field :attribution, style: "width: 175px;" %></td>
+        <td><%= builder.select :image_type_id, ImageType.all.map{ |t| [t.name, t.id] }, {prompt: "Select an image type"}, {style: "width: 175px;"} %></td>
+        <td class="checkbox-cell"><%= builder.check_box :_destroy %></td>
+      </tr>
+    <% end %>
+  </div>
+  </tbody>
+</table>
+<%= link_to "Add another image", "#", class: "js-admin-image-row-add" %>
+
+<fieldset>
+  <legend>Bulk Upload</legend>
+  <%= form.file_field :bulk_image_files, multiple: true %>
+  <%= form.select :bulk_image_id, ImageType.all.map{ |t| [t.name, t.id] }, {prompt: "Select an image type"}, {style: "width: 175px;"} %>
+</fieldset>
+
+

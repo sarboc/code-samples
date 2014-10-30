@@ -1,0 +1,35 @@
+<%= javascript_include_tag "image_gallery" %>
+
+<% if gallery_images.present? %>
+  <div id="image-gallery" data-resource-id="<%= gallery_object.resource_id %>">
+    <div class="border-top-red">
+      <h2 class="title"><%= gallery_object.heading %></h2>
+      <% image_index = 0 %>
+      <% gallery_images.each_slice(6) do |slice| %>
+        <div class="row image-gallery-row">
+          <% slice.each do |asset| %>
+            <% image_index += 1 %>
+            <div class="two columns image-wrapper">
+                <%= image_tag asset.image(:thumb_150),
+                              data: { image_url: make_absolute(asset.image(:large)),
+                                      position: image_index,
+                                      alt: gallery_object.alt_text },
+                              alt: gallery_object.alt_text_thumb %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+
+      <% gallery_image_count = gallery_images.count %>
+      <div id="gallery-position-controls" data-image-count="<%= gallery_image_count %>">
+        <div class="controls-wrapper">
+        <% 1.upto(gallery_image_count) do |index| %>
+          <div class="position-control" data-position="<%= index %>"></div>
+        <% end %>
+        </div>
+      </div>
+    </div>
+    <%= gallery_object.back_to_top.html_safe %>
+  </div>
+<% end %>
+
