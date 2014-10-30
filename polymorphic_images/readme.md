@@ -3,7 +3,7 @@
 Polymorphic images, first implemented in a gallery context, make it easy to attach images to any model in your application. Their front-end use is governed using an image-type, which can either be populated through a database migration or admined through a basic CRUD setup (see the image-types directory in this project).
 
 
-To add images to a model, add the following line:
+####To add images to a model, add the following line:
 
 ```
   include Imageable
@@ -11,7 +11,7 @@ To add images to a model, add the following line:
 Yup. That's it.
 
 
-To add image fields to an admin form:
+####To add image fields to an admin form:
 
 ```
 <%= render 'shared/image_fields', form: form %>
@@ -19,7 +19,7 @@ To add image fields to an admin form:
 The form object passed to the partial should be whatever builder you are using for your form helper (commonly f, form, etc.).
 
 
-To display an image gallery in a view:
+####To display an image gallery in a view:
 
 ```
   <%= render 'films/show/image_gallery', gallery_object: FilmGalleryDecorator.new(@film_dashboard.film), gallery_images: @film_dashboard.gallery_images %>
