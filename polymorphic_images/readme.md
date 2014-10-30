@@ -6,7 +6,7 @@ Polymorphic images, first implemented in a gallery context, make it easy to atta
 ####To add images to a model, add the following line:
 
 ```
-  include Imageable
+include Imageable
 ```
 Yup. That's it.
 
@@ -22,6 +22,6 @@ The form object passed to the partial should be whatever builder you are using f
 ####To display an image gallery in a view:
 
 ```
-  <%= render 'films/show/image_gallery', gallery_object: FilmGalleryDecorator.new(@film), gallery_images: @film.gallery_images %>
+<%= render 'films/show/image_gallery', gallery_object: FilmGalleryDecorator.new(@film), gallery_images: @film.gallery_images %>
 ```
 This example, for a film image gallery, uses the FilmGalleryDecorator. You can create additional decorators that extend GalleryDecorator or, for more simple image galleries, just use the base class. You will also need to pass the gallery an array of images.
